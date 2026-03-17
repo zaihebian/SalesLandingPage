@@ -1,10 +1,8 @@
-import { useState } from 'react'
-import SignUpModal from './SignUpModal'
 import './Pricing.css'
 
-function Pricing() {
-  const [isModalOpen, setIsModalOpen] = useState(false)
+const TRIAL_URL = 'https://leadgen.liqentech.com/'
 
+function Pricing() {
   const plans = [
     {
       name: 'Weekly',
@@ -30,8 +28,7 @@ function Pricing() {
   ]
 
   return (
-    <>
-      <section id="pricing" className="pricing">
+    <section id="pricing" className="pricing">
         <div className="container">
           <h2 className="section-title">Simple, Transparent Pricing</h2>
           <p className="pricing-subtitle">Choose the plan that works best for you</p>
@@ -45,24 +42,17 @@ function Pricing() {
                   <span className="price-period">/ {plan.period}</span>
                 </div>
                 {plan.savings && <div className="plan-savings">{plan.savings}</div>}
-                <button 
-                  onClick={() => setIsModalOpen(true)}
+                <a 
+                  href={TRIAL_URL}
                   className="btn btn-primary pricing-cta"
                 >
                   Get Started
-                </button>
+                </a>
               </div>
             ))}
           </div>
         </div>
-      </section>
-
-      <SignUpModal 
-        isOpen={isModalOpen} 
-        onClose={() => setIsModalOpen(false)}
-        buttonText="Get Started"
-      />
-    </>
+    </section>
   )
 }
 
