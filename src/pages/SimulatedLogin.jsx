@@ -9,7 +9,7 @@ function SimulatedLogin() {
 
   const handleSubmit = (e) => {
     e.preventDefault()
-    alert('This is a simulated login page. In production, this would connect to your authentication system.')
+    window.location.href = 'https://leadgen.liqentech.com/'
   }
 
   return (

@@ -69,7 +69,7 @@ function SignUpModal({ isOpen, onClose, buttonText = "Start Your 7-Day Free Tria
       }))
       
       // Redirect to product page
-      window.location.href = 'https://lead-gen-demo-five.vercel.app'
+      window.location.href = 'https://leadgen.liqentech.com/'
       
     } catch (error) {
       console.error('Error submitting form:', error)
