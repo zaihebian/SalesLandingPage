@@ -15,6 +15,10 @@
   border-bottom: 1px solid var(--color-border);
 }
 
+.nav-backdrop {
+  display: none;
+}
+
 .nav-content {
   display: flex;
   align-items: center;
@@ -27,6 +31,34 @@
   font-weight: 800;
   color: var(--color-primary);
   letter-spacing: -0.02em;
+}
+
+/* Hamburger: hidden on desktop (horizontal nav) */
+.nav-menu-toggle {
+  display: none;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  margin: 0;
+  padding: 0;
+  border: none;
+  background: transparent;
+  color: var(--color-text-primary);
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  flex-shrink: 0;
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.nav-menu-toggle:hover {
+  background-color: var(--color-bg-grey);
+  color: var(--color-primary);
+}
+
+.nav-menu-toggle:focus-visible {
+  outline: 2px solid var(--color-primary);
+  outline-offset: 2px;
 }
 
 .nav-links {
@@ -66,31 +98,82 @@
   background-color: var(--color-primary);
 }
 
-/* Mobile Navigation */
+/* —— Mobile: hamburger + collapsible column (≤768px) —— */
 @media (max-width: 768px) {
+  .nav-backdrop {
+    display: block;
+    position: fixed;
+    inset: 0;
+    z-index: 0;
+    background-color: rgba(0, 0, 0, 0.35);
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s ease;
+  }
+
+  .navigation.menu-open .nav-backdrop {
+    opacity: 1;
+    pointer-events: auto;
+  }
+
+  .navigation {
+    position: fixed;
+  }
+
+  .container {
+    position: relative;
+    z-index: 1;
+  }
+
   .nav-content {
+    flex-wrap: wrap;
     padding: 1rem 0;
   }
-  
+
+  .nav-menu-toggle {
+    display: flex;
+    order: 2;
+  }
+
   .nav-brand {
+    order: 1;
     font-size: 1.25rem;
   }
-  
-  .nav-links {
-    gap: 1.5rem;
-  }
-  
-  .nav-link {
-    font-size: 0.875rem;
-  }
-}
 
-@media (max-width: 640px) {
   .nav-links {
-    gap: 1rem;
+    order: 3;
+    flex-basis: 100%;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0;
+    max-height: 0;
+    overflow: hidden;
+    padding: 0;
+    border-top: 1px solid transparent;
+    margin: 0;
+    transition: max-height 0.35s ease, padding 0.35s ease, border-color 0.35s ease, margin 0.35s ease;
   }
-  
+
+  .nav-links--open {
+    max-height: 22rem;
+    margin-top: 0.75rem;
+    padding: 0.25rem 0 1rem;
+    border-top-color: var(--color-border);
+  }
+
   .nav-link {
-    font-size: 0.8rem;
+    display: block;
+    font-size: 1rem;
+    padding: 0.9rem 0;
+    min-height: 44px;
+  }
+
+  .nav-link.active::after {
+    left: 0;
+    right: auto;
+    bottom: 0.5rem;
+    top: 0.5rem;
+    width: 3px;
+    height: auto;
   }
 }
